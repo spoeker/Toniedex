@@ -3,8 +3,6 @@ import time
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
-
-# import requests
 from helium import start_chrome
 from tqdm import tqdm
 
@@ -25,12 +23,14 @@ def crawl():
             tonie_url = urljoin(url, product.select_one("a").attrs["href"])
             with start_chrome(tonie_url, headless=True) as r_2:
                 selector_2 = BeautifulSoup(r_2.page_source, "html.parser")
-                data["title"] = selector_2.select_one(".hdJxSy").text
-                data["figure"] = selector_2.select_one(".lbAbeF").text
-                data["description"] = selector_2.select_one(".bUGcJn span").text
+                data["title"] = selector_2.select_one(".hdJxSy").get_text()
+                data["figure"] = selector_2.select_one(".lbAbeF").get_text()
+                data["description"] = selector_2.select_one(".bUGcJn span").get_text()
                 data["titlelist"] = []
-                data["runtime"] = selector_2.select(".iBpcit p")[0].text
-                data["age_recommendation"] = selector_2.select(".iBpcit p")[1].text
+                data["runtime"] = selector_2.select(".iBpcit p")[0].get_text()
+                data["age_recommendation"] = selector_2.select(".iBpcit p")[
+                    1
+                ].get_text()
 
                 # image filtern
                 div = selector_2.find_all("img", attrs={"srcset": True})
@@ -40,7 +40,7 @@ def crawl():
                 # verschiedenen Tracks von der Titelliste crawlen
 
                 for track in selector_2.select(".cTIvYe"):
-                    track = track.text
+                    track = track.get_text()
                     data["titlelist"].append(track)
 
                 crawled = Tonie(**data)

@@ -1,0 +1,45 @@
+[
+    {
+        "title": "Achtung, fertig, Zähneputzen!",
+        "figure": "Leos Tag",
+        "description": "Bli-bla-blitzeblanke Zähne! Unser kleiner Leopard hat meistens mehr spannende Dinge im Kopf als Punkte auf seinem Fell. Da ist es gut, dass seine magische Zahnbürste Elli ihn immer wieder freundlich erinnert, dass auch kleine Leoparden ihre Beißerchen putzen müssen. Und zwischen den Kapiteln können die Kleinen selbst aktiv werden: Wenn einer der 8 tollen Songs ertönt, heißt es „Ohren spitzen und mitputzen“! Denn diese sind so konzipiert, dass Kinder „spielend“ die erforderlichen zwei Minuten bürsten. In diesem Mix aus Geschichten und Liedern hilft Leo den Kindern vor allem Spaß zu haben – ob beim „Wackelzahn-Wackelalarm“, dem Zahnfee-Gedicht oder dem Gurgel-Song“.",
+        "titlelist": [
+            "01 - Los geht's!",
+            "02 - Bli-bla-blitzeblanke Zähne",
+            "03 - \"Süße\" Tierchen in deinem Mund?",
+            "04 - Ellis Reise",
+            "05 - Armer, kleiner Leo",
+            "06 - Quatsch im Badezimmmer",
+            "07 - Leoparden-lecker, aber gut für die Zähne?",
+            "08 - Da wackelt was!",
+            "09 - Keine Angst, Leo!",
+            "10 - In geheimer Mission",
+            "11 - Leo und Ellli haben Streit"
+        ],
+        "runtime": "ca. 50 Minuten",
+        "age_recommendation": "Ab 3 Jahre",
+        "image": "https://res.cloudinary.com/tonies/image/fetch/f_auto,q_60,c_fill,b_rgb:ffffff,w_1336,h_1002/https://278163f382d2bab4b036-4f5ec62496a160f3570d3b6e48fc4516.ssl.cf3.rackcdn.com/10001473-50004892-b-CH2wvqo-.png"
+    },
+    {
+        "title": "Gute Nacht, kleine Eule",
+        "figure": "Die Eule mit der Beule",
+        "description": "Gute Nacht, kleine Eule, es ist Schlafenszeit. Warte noch, Mama, ich bin gleich so weit. Die kleine Eule kann noch nicht schlafen. Was hilft da nur? Ein wohlig warmes Bad? Nein! Ein Schlaflied? Auch nicht! Denn am Ende hilft nur eins: der Gutenachtkuss von Mama.",
+        "titlelist": [
+            "01 - Gute Nacht, kleine Eule (Lied)",
+            "02 - Besuch beim Biber",
+            "03 - Die kleine Eule fliegt zu den Sternen",
+            "04 - Die kleine Eule fliegt zu den Sternen (Lied)",
+            "05 - Post für den Spatz",
+            "06 - Die kleine Eule findet einen Freund",
+            "07 - Die kleine Eule findet einen Freund (Lied)",
+            "08 - Ein Tag mit Papa",
+            "09 - Pssst! Die kleine Eule will schlafen",
+            "10 - Das Waldorchester-Lied (Lied)",
+            "11 - Pssst! Die kleine Eule will schlafen (Lied)",
+            "12 - Gute Nacht, kleine Eule (Lied: Instrumental-Version)"
+        ],
+        "runtime": "ca. 49 Minuten",
+        "age_recommendation": "Ab 3 Jahre",
+        "image": "https://res.cloudinary.com/tonies/image/fetch/f_auto,q_60,c_fill,b_rgb:ffffff,w_1336,h_1002/https://278163f382d2bab4b036-4f5ec62496a160f3570d3b6e48fc4516.ssl.cf3.rackcdn.com/10001489-50004782-b-xfVCE7Y5.png"
+    }
+]
