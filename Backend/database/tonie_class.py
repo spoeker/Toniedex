@@ -9,5 +9,4 @@ class Tonie:
     titlelist: list
     runtime: str
     age_recommendation: str
-    material: str
     image: list
