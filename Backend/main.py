@@ -1,4 +1,4 @@
-from database.crawler import crawl
+from get_Tonie.crawler import crawl
 
 counter = 0
 for x in crawl():

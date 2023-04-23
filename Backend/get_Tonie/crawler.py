@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from helium import start_chrome
 from tqdm import tqdm
 
-from database.tonie_class import Tonie
+from get_Tonie.tonie_class import Tonie
 
 
 def crawl():
