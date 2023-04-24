@@ -9,4 +9,4 @@ class Tonie:
     titlelist: list
     runtime: str
     age_recommendation: str
-    image: list
+    image: str

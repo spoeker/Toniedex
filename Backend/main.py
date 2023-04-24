@@ -2,9 +2,9 @@ import json
 
 from get_Tonie.crawler import crawl
 
-counter = 0
 Tonies = []
 for x in crawl():
+    counter = counter + 1
     Tonies.append(x.__dict__)
 
 
