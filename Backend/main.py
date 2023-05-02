@@ -4,7 +4,6 @@ from get_Tonie.crawler import crawl
 
 Tonies = []
 for x in crawl():
-    counter = counter + 1
     Tonies.append(x.__dict__)
 
 
