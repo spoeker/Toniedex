@@ -1,11 +1,8 @@
-import json
-
 from get_Tonie.crawler import crawl
+from get_Tonie.tonie_class import Session
 
-Tonies = []
-for x in crawl():
-    Tonies.append(x.__dict__)
-
-
-with open("Tonies.json", "w", encoding="utf8") as file:
-    json.dump(Tonies, file, indent=4, ensure_ascii=False)
+with Session() as session:
+    for x in crawl():
+        session.add(x)
+        break
+    session.commit()

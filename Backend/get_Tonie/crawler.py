@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from helium import start_chrome
 from tqdm import tqdm
 
-from get_Tonie.tonie_class import Tonie
+from get_Tonie.tonie_class import Titlelist, Tonie
 
 
 def crawl():
@@ -48,8 +48,12 @@ def crawl():
 
                 for track in selector_2.select(".cTIvYe"):
                     track = track.get_text()
+                    title_nr = int(track.split(" - ")[0])
+                    title = track.split(" - ")[-1]
+                    track = Titlelist(title_nr=title_nr, title=title)
                     data["titlelist"].append(track)
 
                 crawled = Tonie(**data)
+
                 yield crawled
                 pbar.update(1)
