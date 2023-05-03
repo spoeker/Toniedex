@@ -18,6 +18,7 @@ def crawl():
         selector = BeautifulSoup(r.page_source, "html.parser")
         urlfinder = selector.select(".ProductCollection__Wrapper-sc-11gm1d0-0")
         pbar = tqdm(total=len(urlfinder), dynamic_ncols=True)
+
         for product in urlfinder:
             data = {}
             tonie_url = urljoin(url, product.select_one("a").attrs["href"])
@@ -48,8 +49,8 @@ def crawl():
 
                 for track in selector_2.select(".cTIvYe"):
                     track = track.get_text()
-                    title_nr = int(track.split(" - ")[0])
-                    title = track.split(" - ")[-1]
+                    title_nr = int(track.split("-")[0])
+                    title = track.split("-")[-1]
                     track = Titlelist(title_nr=title_nr, title=title)
                     data["titlelist"].append(track)
 
