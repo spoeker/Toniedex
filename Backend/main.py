@@ -12,7 +12,6 @@ with Session() as session:
         )
         if exist_tonie:
             x.tonie_id = exist_tonie.tonie_id
-            print(x.description)
 
             for i, title in enumerate(exist_tonie.titlelist):
                 x.titlelist[i].tonie_id = exist_tonie.tonie_id
