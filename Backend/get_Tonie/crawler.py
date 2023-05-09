@@ -43,7 +43,8 @@ def crawl():
         data["figure"] = tonie_dic["series"]["label"]
         data["description"] = tonie_dic["description"]
         data["image"] = tonie_dic["images"][1]["src"]
-
+        data["runtime"] = tonie_dic.get("runTime", "Keine Laufzeitangabe")
+        data["age_recommendation"] = tonie_dic.get("ageMin", "Keine Altersangabe")
         data["titlelist"] = []
 
         for i, track in enumerate(
@@ -51,17 +52,5 @@ def crawl():
             start=1,
         ):
             data["titlelist"].append(Titlelist(title_nr=i, title=track))
-
-        # check runtime
-        if "runTime" in tonie_dic:
-            data["runtime"] = tonie_dic["runTime"]
-        else:
-            data["runtime"] = "Keine Laufzeitangabe"
-
-        # check age recommendation
-        if "ageMin" in tonie_dic:
-            data["age_recommendation"] = tonie_dic["ageMin"]
-        else:
-            data["age_recommendation"] = "Keine Altersangabe"
 
         yield Tonie(**data)
