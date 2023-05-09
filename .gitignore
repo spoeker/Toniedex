@@ -1,0 +1,8 @@
+.venv
+*.ipynb
+.vscode
+*.json
+*.db
+crawler_old.py
+
+

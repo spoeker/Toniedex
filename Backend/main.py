@@ -5,9 +5,6 @@ counter = 0
 
 with Session() as session:
     for x in crawl():
-        counter += 1
-        if counter == 3:
-            break
         exist_tonie = (
             session.query(Tonie)
             .filter(Tonie.title == x.title, Tonie.figure == x.figure)

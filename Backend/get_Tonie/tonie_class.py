@@ -26,8 +26,8 @@ class Tonie(Base):
     figure = Column(String)
     description = Column(Text)
     titlelist = relationship("Titlelist")
-    runtime = Column(String, nullable=True)
-    age_recommendation = Column(String, nullable=True)
+    runtime = Column(Integer, nullable=True)
+    age_recommendation = Column(Integer, nullable=True)
     image = Column(String)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
     time_updated = Column(DateTime(timezone=True), onupdate=func.now())
@@ -38,9 +38,9 @@ class Titlelist(Base):
     tonie = relationship("Tonie", back_populates="titlelist")
 
     list_id = Column(Integer, primary_key=True, autoincrement=True)
-    tonie_id = Column(Integer, ForeignKey("Tonies.tonie_id"))
     title_nr = Column(Integer)
     title = Column(String)
+    tonie_id = Column(Integer, ForeignKey("Tonies.tonie_id"))
     time_created = Column(DateTime(timezone=True), server_default=func.now())
     time_updated = Column(DateTime(timezone=True), onupdate=func.now())
 
