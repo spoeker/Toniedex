@@ -7,7 +7,7 @@ def get_table():
         return result
 
 
-def get_detail(tonie_id: int):
+def get_detail(tonie_id):
     with Session() as session:
         result = session.query(Tonie).filter(Tonie.tonie_id == tonie_id).first()
         return result

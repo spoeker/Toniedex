@@ -1,60 +1,67 @@
-import re
+import json
 import time
-from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
-from helium import start_chrome
-from tqdm import tqdm
+# from urllib import request
+import requests
 
 from get_Tonie.tonie_class import Titlelist, Tonie
 
 
 def crawl():
-    url = "https://tonies.com/de-de/tonies/?page=999"
+    time.sleep(3)
+    url = "https://tonies.com/_next/data/XIOvwhAiwmwJBkFb9cRmz/de-de/tonies.json?locale=de-de&slug=tonies&page=999"
+    r = requests.get(url)
+    main_json = r.json()
+    page_dic = main_json["pageProps"]["page"]["productList"]["normalizedProducts"]
+    netkey_parts = url.split("/", 6)
+    netkey_url = (
+        netkey_parts[0]
+        + "/"
+        + netkey_parts[1]
+        + "/"
+        + netkey_parts[2]
+        + "/"
+        + netkey_parts[3]
+        + "/"
+        + netkey_parts[4]
+        + "/"
+        + netkey_parts[5]
+    )
 
-    with start_chrome(url, headless=True) as r:
-        time.sleep(3)
+    for x in page_dic:
+        value = x["path"].rstrip("/")
 
-        selector = BeautifulSoup(r.page_source, "html.parser")
-        urlfinder = selector.select(".ProductCollection__Wrapper-sc-11gm1d0-0")
-        pbar = tqdm(total=len(urlfinder), dynamic_ncols=True)
+        new_url = netkey_url + value + ".json"
 
-        for product in urlfinder:
-            data = {}
-            tonie_url = urljoin(url, product.select_one("a").attrs["href"])
-            with start_chrome(tonie_url, headless=True) as r_2:
-                time.sleep(2)
-                selector_2 = BeautifulSoup(r_2.page_source, "html.parser")
-                data["title"] = selector_2.select_one(".hdJxSy").get_text()
-                data["figure"] = selector_2.select_one(".lbAbeF").get_text()
-                data["description"] = selector_2.select_one(".bUGcJn span").get_text()
-                data["titlelist"] = []
+        r_2 = requests.get(new_url)
+        tonie_json = r_2.json()
+        tonie_dic = tonie_json["pageProps"]["product"]
+        data = {}
 
-                check_runtime = selector_2.select(".iBpcit p")[0].get_text()
-                if "Minuten" not in check_runtime:
-                    data["runtime"] = "Keine Laufzeit"
-                    data["age_recommendation"] = check_runtime
-                else:
-                    data["runtime"] = check_runtime
-                    data["age_recommendation"] = selector_2.select(".iBpcit p")[
-                        1
-                    ].get_text()
+        data["title"] = tonie_dic["name"]
 
-                # image filtern
-                div = selector_2.find_all("img", attrs={"srcset": True})
-                image = div[-1].get("srcset")
-                data["image"] = re.findall("https[^\s]*1336[^\s]*", image)[-1]
+        data["figure"] = tonie_dic["series"]["label"]
+        data["description"] = tonie_dic["description"]
+        data["image"] = tonie_dic["images"][1]["src"]
 
-                # verschiedenen Tracks von der Titelliste crawlen
+        data["titlelist"] = []
 
-                for track in selector_2.select(".cTIvYe"):
-                    track = track.get_text()
-                    title_nr = int(track.split("-")[0])
-                    title = track.split("-")[-1]
-                    track = Titlelist(title_nr=title_nr, title=title)
-                    data["titlelist"].append(track)
+        for i, track in enumerate(
+            tonie_dic.get("tracks", []),
+            start=1,
+        ):
+            data["titlelist"].append(Titlelist(title_nr=i, title=track))
 
-                crawled = Tonie(**data)
+        # check runtime
+        if "runTime" in tonie_dic:
+            data["runtime"] = tonie_dic["runTime"]
+        else:
+            data["runtime"] = "Keine Laufzeitangabe"
 
-                yield crawled
-                pbar.update(1)
+        # check age recommendation
+        if "ageMin" in tonie_dic:
+            data["age_recommendation"] = tonie_dic["ageMin"]
+        else:
+            data["age_recommendation"] = "Keine Altersangabe"
+
+        yield Tonie(**data)

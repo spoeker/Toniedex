@@ -5,9 +5,6 @@ counter = 0
 
 with Session() as session:
     for x in crawl():
-        counter += 1
-        if counter == 3:
-            break
         exist_tonie = (
             session.query(Tonie)
             .filter(Tonie.title == x.title, Tonie.figure == x.figure)
@@ -15,6 +12,7 @@ with Session() as session:
         )
         if exist_tonie:
             x.tonie_id = exist_tonie.tonie_id
+            print(x.description)
 
             for i, title in enumerate(exist_tonie.titlelist):
                 x.titlelist[i].tonie_id = exist_tonie.tonie_id
@@ -24,4 +22,5 @@ with Session() as session:
 
         else:
             session.add(x)
+
     session.commit()

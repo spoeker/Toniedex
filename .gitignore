@@ -3,3 +3,6 @@
 .vscode
 *.json
 *.db
+crawler_old.py
+
+
