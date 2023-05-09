@@ -21,5 +21,4 @@ with Session() as session:
 
         else:
             session.add(x)
-
     session.commit()
