@@ -13,7 +13,7 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.sql import func
 
 Base = declarative_base()
-engine = create_engine("sqlite:///Tonies.db")
+engine = create_engine("sqlite:///C:/Users/Nhat-/Desktop/Toniedex/Backend/Tonies.db")
 Session = sessionmaker(bind=engine)
 
 
